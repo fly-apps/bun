@@ -1,8 +1,16 @@
 // http.js
-console.log("Doing it")
+const vmRegion = process.env.FLY_REGION || "local"
+console.log(`Doing it from ${vmRegion}`)
 export default {
     port: 3000,
     fetch(request) {
-      return new Response("Welcome to Bun!");
+      const region = request.headers.get("fly-region") || "??"
+      const url = new URL(request.url)
+      console.log(request.headers.get("fly-client-ip"), request.url)
+      return new Response(`
+        Welcome to Bun!\n\n
+        This is ${url.pathname}\n
+        Served from ${region}
+    `);
     },
   };

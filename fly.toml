@@ -17,3 +17,5 @@ protocol      = "tcp"
   port     = "443"
 
   [[services.tcp_checks]]
+  interval = 10000
+  timeout  = 2000
